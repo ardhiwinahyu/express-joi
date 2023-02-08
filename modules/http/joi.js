@@ -5,9 +5,11 @@ const validate = (req, res, next) => {
 		id: Joi.number().required(),
 	});
 
+	console.log(schema);
 	const { value } = schema.validate(req.params);
+	console.log(value);
 	if (value.id !== 1) {
-		return res.status(400).json({ msg: "Id tidak ditemukan" });
+		return res.status(400).json({ message: "Id tidak ditemukan" });
 	}
 
 	next();
