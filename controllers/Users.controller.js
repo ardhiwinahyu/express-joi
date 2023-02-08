@@ -17,6 +17,25 @@ const getAllUsers = async function (req, res, next) {
 	}
 };
 
+const postUser = async function (req, res, next) {
+	try {
+		const submitPost = await postTodos();
+		const data = submitPost.data;
+
+		res.send({
+			status: true,
+			data: data,
+		});
+	} catch (error) {
+		console.log("tes", error);
+		res.send({
+			status: false,
+			message: error.message,
+		});
+	}
+};
+
 module.exports = {
 	getAllUsers,
+	postUser,
 };

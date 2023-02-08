@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { validate } = require("../modules/http/joi");
-const { getAllUsers } = require("../controllers/Users.controller");
+const { getAllUsers, postUser } = require("../controllers/Users.controller");
 
 // /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -12,23 +12,7 @@ router.get("/", function (req, res, next) {
 router.get("/get/:id", validate, getAllUsers);
 
 //post todos
-router.post("/submit':id", async function (req, res, next) {
-	try {
-		const submitPost = await postTodos();
-		const data = submitPost.data;
-
-		res.send({
-			status: true,
-			data: data,
-		});
-	} catch (error) {
-		console.log("tes", error);
-		res.send({
-			status: false,
-			message: error.message,
-		});
-	}
-});
+router.post("/submit/:id", validate, postUser);
 
 //put todos
 router.put("/edit/:id", async function (req, res, next) {
