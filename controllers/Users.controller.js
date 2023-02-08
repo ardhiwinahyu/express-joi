@@ -54,8 +54,48 @@ const putUser = async function (req, res, next) {
 		});
 	}
 };
+
+const patchUser = async function (req, res, next) {
+	try {
+		const { id } = req.params;
+		const patchData = await patchTodos(id);
+
+		const data = patchData.data;
+		res.send({
+			status: true,
+			data: data,
+		});
+	} catch (error) {
+		res.send({
+			status: false,
+			message: error.message,
+		});
+	}
+};
+
+const deleteUser = async function (req, res, nex) {
+	try {
+		const id = req.params.id;
+
+		const todosRespond = await deleteTodos(id);
+		const data = await todosRespond.data;
+
+		res.send({
+			status: true,
+			data: data,
+		});
+	} catch (error) {
+		res.send({
+			status: false,
+			message: error.message,
+		});
+	}
+};
+
 module.exports = {
 	getAllUsers,
 	postUser,
 	putUser,
+	patchUser,
+	deleteUser,
 };

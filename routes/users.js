@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { validate } = require("../modules/http/joi");
-const { getAllUsers, postUser, putUser } = require("../controllers/Users.controller");
+const { getAllUsers, postUser, putUser, patchUser, deleteUser } = require("../controllers/Users.controller");
 
 // /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -18,43 +18,10 @@ router.post("/submit/:id", validate, postUser);
 router.put("/edit/:id", validate, putUser);
 
 // patch todos
-router.patch("/patch/:id", async function (req, res, next) {
-	try {
-		const { id } = req.params;
-		const patchData = await patchTodos(id);
-
-		const data = patchData.data;
-		res.send({
-			status: true,
-			data: data,
-		});
-	} catch (error) {
-		res.send({
-			status: false,
-			message: error.message,
-		});
-	}
-});
+router.patch("/patch/:id", validate, patchUser);
 
 //delete todos
 
-router.delete("/delete/:id", async function (req, res, nex) {
-	try {
-		const id = req.params.id;
-
-		const todosRespond = await deleteTodos(id);
-		const data = await todosRespond.data;
-
-		res.send({
-			status: true,
-			data: data,
-		});
-	} catch (error) {
-		res.send({
-			status: false,
-			message: error.message,
-		});
-	}
-});
+router.delete("/delete/:id", validate, deleteUser);
 
 module.exports = router;

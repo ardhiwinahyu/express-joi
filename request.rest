@@ -1,12 +1,8 @@
-POST http://localhost:3000/users/submit/1
+DELETE http://localhost:3000/users/delete/1
 
-content-type: application/json
 
-{
-    "title": "Hello helo",
-	"userId": 1,
-	"body": "bar",
-}
+
+
 ###
 
 # POST http://localhost:3000/users/submit Content-Type: application/json
