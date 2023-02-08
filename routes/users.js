@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { validate } = require("../modules/http/joi");
-const { getAllUsers, postUser } = require("../controllers/Users.controller");
+const { getAllUsers, postUser, putUser } = require("../controllers/Users.controller");
 
 // /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -15,28 +15,9 @@ router.get("/get/:id", validate, getAllUsers);
 router.post("/submit/:id", validate, postUser);
 
 //put todos
-router.put("/edit/:id", async function (req, res, next) {
-	try {
-		const id = req.params.id;
-
-		const putPost = await putTodos(id);
-		const putRespond = putPost.data;
-
-		res.send({
-			status: true,
-			data: putRespond,
-		});
-	} catch (error) {
-		console.log(error);
-		res.send({
-			status: false,
-			message: error.message,
-		});
-	}
-});
+router.put("/edit/:id", validate, putUser);
 
 // patch todos
-
 router.patch("/patch/:id", async function (req, res, next) {
 	try {
 		const { id } = req.params;

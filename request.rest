@@ -1,4 +1,12 @@
-GET http://localhost:3000/users/get/1
+POST http://localhost:3000/users/submit/1
+
+content-type: application/json
+
+{
+    "title": "Hello helo",
+	"userId": 1,
+	"body": "bar",
+}
 ###
 
 # POST http://localhost:3000/users/submit Content-Type: application/json

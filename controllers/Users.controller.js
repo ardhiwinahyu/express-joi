@@ -35,7 +35,27 @@ const postUser = async function (req, res, next) {
 	}
 };
 
+const putUser = async function (req, res, next) {
+	try {
+		const id = req.params.id;
+
+		const putPost = await putTodos(id);
+		const putRespond = putPost.data;
+
+		res.send({
+			status: true,
+			data: putRespond,
+		});
+	} catch (error) {
+		console.log(error);
+		res.send({
+			status: false,
+			message: error.message,
+		});
+	}
+};
 module.exports = {
 	getAllUsers,
 	postUser,
+	putUser,
 };
